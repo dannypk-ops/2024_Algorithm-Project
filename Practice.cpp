@@ -57,14 +57,12 @@ int main() {
     }
     inputFile.close();
 
-//    for (auto item : Folder_List)
-//    {
-//        cout << " Name: " << item.Folder_Name << endl;
-//        cout << " Path: " << item.path << endl;
-//        cout << endl;
-//    }
-    for( char c : Only_Directory)
-        cout << c;
+    for (auto item : Folder_List)
+    {
+        cout << " Name: " << item.Folder_Name << endl;
+        cout << " Path: " << item.path << endl;
+        cout << endl;
+    }
 }
 
 void ProcessingLine(string line)
@@ -148,7 +146,6 @@ void ExtractingLine(string line)
     size_t pos = line.find_last_of("-") + 1;
     string folderName = line.substr(pos);
 
-    cout << folderName << ", " << depth << endl;
     if(Hierarchy.size() > depth)
     {
         while ( Hierarchy.size() > depth)
