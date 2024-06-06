@@ -57,12 +57,14 @@ int main() {
     }
     inputFile.close();
 
-    for (auto item : Folder_List)
-    {
-        cout << " Name: " << item.Folder_Name << endl;
-        cout << " Path: " << item.path << endl;
-        cout << endl;
-    }
+//    for (auto item : Folder_List)
+//    {
+//        cout << " Name: " << item.Folder_Name << endl;
+//        cout << " Path: " << item.path << endl;
+//        cout << endl;
+//    }
+    for( char c : Only_Directory)
+        cout << c;
 }
 
 void ProcessingLine(string line)
@@ -86,6 +88,7 @@ void ProcessingLine(string line)
 }
 int calculateDepth(string line) {
     int totalDepth = 0;
+    int flag = 0;
     size_t pos = 0;
     size_t prev_pos = 0;
 
@@ -94,10 +97,11 @@ int calculateDepth(string line) {
         int spaceLength = pos - prev_pos - 1;
 
         // 첫 번째 '|'는 고려하지 않으므로 continue
-        if (prev_pos == 0) {
+        if (flag == 0) {
             prev_pos = pos;
             pos++;
             totalDepth++;
+            flag = 1;
             continue;
         }
 
@@ -144,6 +148,7 @@ void ExtractingLine(string line)
     size_t pos = line.find_last_of("-") + 1;
     string folderName = line.substr(pos);
 
+    cout << folderName << ", " << depth << endl;
     if(Hierarchy.size() > depth)
     {
         while ( Hierarchy.size() > depth)
