@@ -4,43 +4,6 @@
 
 #include "Processing_Tree.h"
 
-int main() {
-    string path = "file.txt";
-    string Current_Path = "current.txt";
-    string line;
-
-    ifstream START(Current_Path);
-    if (!START) {
-        cout << "파일을 열 수 없습니다." << endl;
-        return 1;
-    }
-    getline(START, start_directory);
-    START.close();
-
-    cout << start_directory << endl;
-
-    ifstream inputFile(path);
-    if (!inputFile) {
-        cout << "파일을 열 수 없습니다." << endl;
-        return 1;
-    }
-
-    int index = 0;
-    while (getline(inputFile, line)) {
-        index++;
-        if (index == 1 || index == 2)
-            continue;
-        ProcessingLine(line);
-    }
-    inputFile.close();
-
-    for (auto item : Folder_List)
-    {
-        cout << " Name: " << item.Folder_Name << endl;
-        cout << " Path: " << item.path << endl;
-        cout << endl;
-    }
-}
 void ProcessingLine(string line)
 {
     int pos = string::npos;
@@ -154,3 +117,41 @@ void ExtractingLine(string line)
     folderNode.path = fullPath;
     Folder_List.push_back(folderNode);
 }
+
+//int main() {
+//    string path = "file.txt";
+//    string Current_Path = "current.txt";
+//    string line;
+//
+//    ifstream START(Current_Path);
+//    if (!START) {
+//        cout << "파일을 열 수 없습니다." << endl;
+//        return 1;
+//    }
+//    getline(START, start_directory);
+//    START.close();
+//
+//    cout << start_directory << endl;
+//
+//    ifstream inputFile(path);
+//    if (!inputFile) {
+//        cout << "파일을 열 수 없습니다." << endl;
+//        return 1;
+//    }
+//
+//    int index = 0;
+//    while (getline(inputFile, line)) {
+//        index++;
+//        if (index == 1 || index == 2)
+//            continue;
+//        ProcessingLine(line);
+//    }
+//    inputFile.close();
+//
+//    for (auto item : Folder_List)
+//    {
+//        cout << " Name: " << item.Folder_Name << endl;
+//        cout << " Path: " << item.path << endl;
+//        cout << endl;
+//    }
+//}
