@@ -295,7 +295,7 @@ C:.
 |   +---.vscode
 |   |       settings.json
 |   |
-|   \---DROID-SLAM
+|   \---DROID_SLAM
 |       |   .gitignore
 |       |   .gitmodules
 |       |   demo.py

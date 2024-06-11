@@ -1,31 +1,8 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <algorithm>
-#include <deque>
-#include <vector>
+//
+// Created by 박준규 on 2024. 6. 11..
+//
 
-using namespace std;
-
-void ProcessingLine(string line); // Deleting hidden directory and Preprocessing text File
-void ExtractingLine(string line); // Creating Folder_List
-int calculateDepth(string line);  // Calculating Directory Depth
-
-struct node{
-    string Folder_Name;
-    string path;
-};
-typedef struct node node;
-typedef node* node_ptr;
-
-string str_01 = "+---";
-string str_02 = "\\---";
-string Only_Directory;
-string start_directory;
-
-vector<node> Folder_List;
-deque<string> Hierarchy;
-
+#include "Processing_Tree.h"
 
 int main() {
     string path = "file.txt";
@@ -64,7 +41,6 @@ int main() {
         cout << endl;
     }
 }
-
 void ProcessingLine(string line)
 {
     int pos = string::npos;
@@ -178,4 +154,3 @@ void ExtractingLine(string line)
     folderNode.path = fullPath;
     Folder_List.push_back(folderNode);
 }
-
