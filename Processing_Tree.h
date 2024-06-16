@@ -1,36 +1,33 @@
-//
-// Created by 박준규 on 2024. 6. 11..
-//
-
 #ifndef UNTITLED_PROCESSING_TREE_H
 #define UNTITLED_PROCESSING_TREE_H
 
 #include <iostream>
 #include <string>
-#include <fstream>
-#include <algorithm>
 #include <deque>
 #include <vector>
 
-using namespace std;
+extern std::string str_01;
+extern std::string str_02;
+extern std::string Only_Directory;
+extern std::string start_directory;
 
-void ProcessingLine(string line); // Deleting hidden directory and Preprocessing text File
-void ExtractingLine(string line); // Creating Folder_List
-int calculateDepth(string line);  // Calculating Directory Depth
-
-struct node{
-    string Folder_Name;
-    string path;
+struct node {
+    std::string Folder_Name;
+    std::string path;
+    double Similarity = 0;
+    bool operator<(const node& other) const{
+        // Similarity 기준으로 정렬
+        return Similarity < other.Similarity;
+    }
 };
 typedef struct node node;
 typedef node* node_ptr;
 
-string str_01 = "+---";
-string str_02 = "\\---";
-string Only_Directory;
-string start_directory;
+extern std::vector<node> Folder_List;
+extern std::deque<std::string> Hierarchy;
 
-vector<node> Folder_List;
-deque<string> Hierarchy;
+void ProcessingLine(std::string line);
+void ExtractingLine(std::string line);
+int calculateDepth(std::string line);
 
-#endif //UNTITLED_PROCESSING_TREE_H
+#endif // UNTITLED_PROCESSING_TREE_H

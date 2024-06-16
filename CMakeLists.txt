@@ -3,5 +3,12 @@ project(untitled)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(untitled
-        Processing_Tree.cpp)
+add_executable(
+        untitled
+        Processing_Tree.cpp
+        Similarity.cpp
+        Similarity.h
+        main.cpp
+        HashFunc.cpp
+        HashFunc.h
+)
