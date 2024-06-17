@@ -57,7 +57,7 @@ int main() {
     vector<node> Result = HashMap.getResult();
 
     // Similarity 구현
-    string File_Name = "src";
+    string File_Name = "tartanair_tools";
     Similarity sim(Result, File_Name);
     sim.MakeOrder();
     priority_queue<node> final_result = sim.getResult();

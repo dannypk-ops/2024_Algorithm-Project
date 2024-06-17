@@ -73,7 +73,11 @@ int calculateDepth(std::string line) {
 void ExtractingLine(std::string line) {
     int depth = calculateDepth(line);
 
-    size_t pos = line.find_last_of("-") + 1;
+    // size_t pos = line.find_last_of("-") + 1;
+    size_t pos = line.find_last_of("+---") + 1;
+    if (pos == std::string::npos)
+        pos = line.find_last_of("\\---") + 1;
+
     std::string folderName = line.substr(pos);
 
     if (Hierarchy.size() > depth) {

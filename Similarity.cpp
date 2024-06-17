@@ -73,38 +73,35 @@ vector<string> Similarity::splitStringByDelimiter(const string& str, char delimi
 //    }
     return tokens;
 }
+// 편집거리를 이용한 두 string의 유사도 측정
+int Similarity::calculateLevenshteinDistance(const string& s1, const string& s2)
+{
+    const size_t len1 = s1.size(), len2 = s2.size();
+    vector<vector<unsigned int>> d(len1 + 1, vector<unsigned int>(len2 + 1));
+
+    d[0][0] = 0;
+    for(size_t i = 1; i <= len1; ++i) d[i][0] = i;
+    for(size_t i = 1; i <= len2; ++i) d[0][i] = i;
+
+    for(size_t i = 1; i <= len1; ++i)
+        for(size_t j = 1; j <= len2; ++j)
+            d[i][j] = min({d[i-1][j] + 1
+                           , d[i][j-1] + 1
+                           , d[i-1][j-1] + (s1[i-1] == s2[i-1] ? 0 : 1)});
+
+    return d[len1][len2];
+}
+
+double Similarity::calculateStringSimilarity(const string& token1, const string& token2)
+{
+    int distance = calculateLevenshteinDistance(token1, token2);
+    int maxLen = max(token1.size(), token2.size());
+
+    return 1.0 - (static_cast<double>(distance) / maxLen);
+}
 
 double Similarity::calculateTokenSimilarity(const string& token1, const string& token2) {
-    // 각 토큰의 벡터 표현을 만듭니다. 간단히 문자열 길이로 나타내겠습니다.
-    vector<int> vec1(token1.size(), 1);
-    vector<int> vec2(token2.size(), 1);
-
-    // 각 벡터의 크기(norm)을 계산합니다.
-    double norm1 = 0.0, norm2 = 0.0;
-    for (size_t i = 0; i < vec1.size(); ++i) {
-        norm1 += vec1[i] * vec1[i];
-        norm2 += vec2[i] * vec2[i];
-    }
-
-    // 벡터의 크기(norm)이 0이면 NaN을 반환합니다.
-    if (norm1 == 0 || norm2 == 0) {
-        return 0.0;  // 또는 다른 적절한 값을 반환할 수 있습니다.
-    }
-
-    // 각 벡터의 내적(dot product)을 계산합니다.
-    double dotProduct = 0.0;
-    for (size_t i = 0; i < vec1.size(); ++i) {
-        dotProduct += vec1[i] * vec2[i];
-    }
-
-    // 각 벡터의 크기(norm)을 계산합니다.
-    norm1 = sqrt(norm1);
-    norm2 = sqrt(norm2);
-
-    // 코사인 유사도를 계산합니다.
-    double cosineSimilarity = dotProduct / (norm1 * norm2);
-
-    return cosineSimilarity;
+    return calculateStringSimilarity(token1, token2);
 }
 
 priority_queue<node> Similarity:: getResult()
